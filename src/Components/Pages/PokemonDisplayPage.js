@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { axiosRequest } from '../apis/apis';
 
 import PokemonCard from '../Cards/PokemonCard';
+import Loader from '../utils/Loader';
 
 const PokemonDisplayPage = () => {
   const [loading, setLoading] = useState(true);
@@ -54,7 +55,7 @@ const PokemonDisplayPage = () => {
 
   return (
     <>
-      <div>{loading && 'Loading ...'}</div>
+      <div>{loading ? <Loader /> : null}</div>
       <div> {error && 'Error ...'}</div>
       <div className="pokemon-page-container">
         {pokemonList.map((poke, index) => {
