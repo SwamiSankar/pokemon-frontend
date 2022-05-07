@@ -1,0 +1,43 @@
+.RSPBprogressBar{
+    margin-top: 10px;
+    margin-left: 5px;
+    width: 65%;
+
+   
+} 
+
+.statbar{
+    &.hp{
+    .RSPBprogressBar{
+        margin-left: 32px;
+    .RSPBprogression{
+        background: #FF5959;
+    }
+}
+}
+&.attack{
+    .RSPBprogressBar{
+        margin-left:14px;
+    .RSPBprogression{
+        background: #F5AC78;
+    }
+}
+}
+&.defense{
+    .RSPBprogressBar{
+        
+    .RSPBprogression{
+        background: #FAE078;
+    }
+}
+}
+&.speed{
+    .RSPBprogressBar{
+        margin-left: 16px;
+        .RSPBprogression{
+            background: #FA92B2;
+        }
+    }
+}
+}
+
