@@ -44,8 +44,6 @@ const PokemonCard = ({ raw_data }) => {
     };
   }
 
-  console.log(hpObject, attackObject, defenseObject, speedObject);
-
   const image_url = sprites.front_default;
   const card_gradient = (types) => {
     if (types.length === 1) {
@@ -87,9 +85,7 @@ const PokemonCard = ({ raw_data }) => {
     };
 
     assignPokemon(raw_data.url);
-  }, []);
-
-  console.log(pokemon);
+  }, [raw_data]);
 
   return (
     <>

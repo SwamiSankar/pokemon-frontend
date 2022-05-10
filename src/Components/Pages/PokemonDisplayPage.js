@@ -1,8 +1,16 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
+import { AppContext } from '../../App';
 import { axiosRequest } from '../apis/apis';
 
 import PokemonCard from '../Cards/PokemonCard';
 import Loader from '../utils/Loader';
+import SearchBar from '../utils/SearchBar';
 
 const PokemonDisplayPage = () => {
   const [loading, setLoading] = useState(true);
@@ -10,6 +18,9 @@ const PokemonDisplayPage = () => {
   const [isThere, setIsThere] = useState(false);
   const [offset, setOffset] = useState(0);
   const [pokemonList, setPokemonList] = useState([]);
+
+  const { state } = useContext(AppContext);
+  const { isSearch, filteredList } = state.searchData;
 
   const observer = useRef();
 
@@ -22,7 +33,6 @@ const PokemonDisplayPage = () => {
           setOffset((prevOffset) => prevOffset + 20);
         }
       });
-      console.log(node);
       if (node) observer.current.observe(node);
     },
     [loading, isThere]
@@ -53,26 +63,37 @@ const PokemonDisplayPage = () => {
     fetchPokemonList();
   }, [offset]);
 
+  useEffect(() => {}, [state]);
+
   return (
     <>
       <div>{loading ? <Loader /> : null}</div>
       <div> {error && 'Error ...'}</div>
+      <SearchBar />
       <div className="pokemon-page-container">
-        {pokemonList.map((poke, index) => {
-          if (pokemonList.length === index + 1) {
-            return (
-              <div key={index} ref={lastElement}>
-                <PokemonCard raw_data={poke} />
-              </div>
-            );
-          } else {
-            return (
-              <div key={index}>
-                <PokemonCard raw_data={poke} />
-              </div>
-            );
-          }
-        })}
+        {isSearch
+          ? filteredList.map((searchPoke, index) => {
+              return (
+                <div key={index}>
+                  <PokemonCard raw_data={searchPoke} />
+                </div>
+              );
+            })
+          : pokemonList.map((poke, index) => {
+              if (pokemonList.length === index + 1) {
+                return (
+                  <div key={index} ref={lastElement}>
+                    <PokemonCard raw_data={poke} />
+                  </div>
+                );
+              } else {
+                return (
+                  <div key={index}>
+                    <PokemonCard raw_data={poke} />
+                  </div>
+                );
+              }
+            })}
       </div>
     </>
   );
