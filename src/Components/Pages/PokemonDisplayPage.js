@@ -71,29 +71,35 @@ const PokemonDisplayPage = () => {
       <div> {error && 'Error ...'}</div>
       <SearchBar />
       <div className="pokemon-page-container">
-        {isSearch
-          ? filteredList.map((searchPoke, index) => {
+        {isSearch ? (
+          filteredList.length > 0 ? (
+            filteredList.map((searchPoke, index) => {
               return (
                 <div key={index}>
                   <PokemonCard raw_data={searchPoke} />
                 </div>
               );
             })
-          : pokemonList.map((poke, index) => {
-              if (pokemonList.length === index + 1) {
-                return (
-                  <div key={index} ref={lastElement}>
-                    <PokemonCard raw_data={poke} />
-                  </div>
-                );
-              } else {
-                return (
-                  <div key={index}>
-                    <PokemonCard raw_data={poke} />
-                  </div>
-                );
-              }
-            })}
+          ) : (
+            <div className="no-results">Oops.. No Pokemon found </div>
+          )
+        ) : (
+          pokemonList.map((poke, index) => {
+            if (pokemonList.length === index + 1) {
+              return (
+                <div key={index} ref={lastElement}>
+                  <PokemonCard raw_data={poke} />
+                </div>
+              );
+            } else {
+              return (
+                <div key={index}>
+                  <PokemonCard raw_data={poke} />
+                </div>
+              );
+            }
+          })
+        )}
       </div>
     </>
   );

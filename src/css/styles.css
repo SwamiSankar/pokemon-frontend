@@ -16,6 +16,10 @@
   row-gap: 75px;
   margin: 15% 0 0 15%;
   padding: 40px 0; }
+  .pokemon-page-container .no-results {
+    grid-column-start: 2;
+    grid-column-end: 4;
+    font-size: 20px; }
 
 .stats-container {
   box-sizing: border-box;

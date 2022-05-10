@@ -43,6 +43,10 @@ const SearchBar = () => {
       pokemonObject.filteredList = filteredArray;
       pokemonObject.isSearch = true;
       dispatch({ type: 'POKEMON_SEARCH', data: pokemonObject });
+    } else if (filteredArray.length === 0 && inputText !== '') {
+      pokemonObject.filteredList = [];
+      pokemonObject.isSearch = true;
+      dispatch({ type: 'POKEMON_SEARCH', data: pokemonObject });
     } else {
       pokemonObject.filteredList = [];
       pokemonObject.isSearch = false;
